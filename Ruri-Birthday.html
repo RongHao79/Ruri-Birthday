@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 Happy Birthday, Your Highness! | Royal Lily Garden</title>
+    
+    <!-- 
+    ============================================
+    👑🌸 CUSTOMIZATION GUIDE 🌸👑
+    ============================================
+    1. YOUR IMAGES: Replace the image URLs in the carouselImages array below
+       - Upload to imgur.com (free) → right click → "Copy image address"
+       - Add as many images as you want! (just add URLs to the array)
+    2. YOUR VIDEO: Replace YOUTUBE_VIDEO_ID with the YouTube video ID
+       - Example: youtube.com/watch?v=dQw4w9WgXcQ → ID is "dQw4w9WgXcQ"
+    3. NAME: Search for "Friend" and replace with the birthday person's name
+    ============================================
+    -->
+    
+    <style>
+        :root {
+            --royal-purple: #3d1a4a;
+            --regal-plum: #5c2d6e;
+            --lily-white: #fdf7fc;
+            --soft-petal: #f8eaf4;
+            --lily-pink: #eccfdf;
+            --gold: #d4a843;
+            --gold-light: #f0d878;
+            --gold-pale: #faf0d7;
+            --crown-gold: #c9952e;
+            --deep-green: #5a7a5e;
+            --velvet: #4a2540;
+            --text-dark: #3d2035;
+            --text-regal: #5c3050;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(170deg, #2a1028 0%, #3d1a4a 20%, #4a2050 40%, #3d1a4a 70%, #2a1028 100%);
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', system-ui, serif;
+            padding: 1.2rem;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ---- Golden Sparkle Particles ---- */
+        .sparkles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sparkle {
+            position: absolute;
+            animation: sparkleFloat var(--float-duration) linear infinite;
+            animation-delay: var(--float-delay);
+            pointer-events: none;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(-5vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(5vh) translateX(var(--drift-1)) scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translateY(50vh) translateX(var(--drift-2)) scale(0.6);
+                opacity: 0.5;
+            }
+            90% {
+                transform: translateY(95vh) translateX(var(--drift-3)) scale(0.2);
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(105vh) translateX(var(--drift-4)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* ---- Floating Lily Petals ---- */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .petal {
+            position: absolute;
+            animation: petalDrift var(--fall-duration) linear infinite;
+            animation-delay: var(--fall-delay);
+            opacity: 0.65;
+            filter: drop-shadow(0 2px 5px rgba(200,160,120,0.4));
+        }
+
+        @keyframes petalDrift {
+            0% {
+                transform: translateY(-8vh) translateX(0) rotate(0deg) scale(1);
+                opacity: 0.75;
+            }
+            30% {
+                transform: translateY(30vh) translateX(var(--sway-1)) rotate(120deg) scale(1.1);
+                opacity: 0.6;
+            }
+            60% {
+                transform: translateY(60vh) translateX(var(--sway-2)) rotate(240deg) scale(0.85);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(108vh) translateX(var(--sway-3)) rotate(360deg) scale(0.4);
+                opacity: 0;
+            }
+        }
+
+        /* ---- Main Card ---- */
+        .card {
+            background: linear-gradient(160deg, rgba(255,248,252,0.92) 0%, rgba(250,238,245,0.95) 35%, rgba(245,228,238,0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 3px solid rgba(200,160,120,0.6);
+            border-radius: 3.5rem;
+            box-shadow: 
+                0 25px 55px rgba(0,0,0,0.5),
+                0 0 0 2px rgba(220,180,140,0.5),
+                0 0 60px rgba(200,150,80,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+            padding: 2.5rem 2rem 2rem;
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: royalEntrance 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #d4a843, #f0d878, #d4a843, transparent);
+            border-radius: 0 0 6px 6px;
+            z-index: 2;
+        }
+
+        @keyframes royalEntrance {
+            0% {
+                transform: translateY(40px) scale(0.85);
+                opacity: 0;
+                filter: blur(4px);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        /* ---- Royal Crest / Crown ---- */
+        .crown-icon {
+            font-size: 4rem;
+            display: block;
+            animation: crownGlow 2.5s infinite ease-in-out;
+            filter: drop-shadow(0 8px 14px rgba(200,150,50,0.7));
+            margin-bottom: 0.1rem;
+            cursor: pointer;
+        }
+
+        @keyframes crownGlow {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 8px 14px rgba(200,150,50,0.7));
+            }
+            50% { 
+                transform: translateY(-8px) scale(1.08);
+                filter: drop-shadow(0 14px 20px rgba(240,200,80,0.9));
+            }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 700;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(180deg, #c9952e 0%, #e0b850 30%, #f0d878 50%, #c9952e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0.2rem 0 0.3rem;
+            letter-spacing: 0.5px;
+            filter: drop-shadow(0 2px 4px rgba(180,130,40,0.4));
+        }
+
+        .title-royal {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c9952e;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .name-highlight {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #5c3050;
+            background: linear-gradient(135deg, rgba(240,216,180,0.6), rgba(250,235,210,0.7));
+            display: inline-block;
+            padding: 0.4rem 2.4rem;
+            border-radius: 3rem;
+            margin: 0.5rem 0 1.2rem;
+            letter-spacing: 0.8px;
+            border: 2px solid #d4a843;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 4px 12px rgba(180,140,80,0.3);
+        }
+
+        /* ---- CAROUSEL SECTION ---- */
+        .carousel-section {
+            margin: 0 0 1.2rem;
+            position: relative;
+        }
+
+        .carousel-label {
+            color: #c9952e;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 300px;
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 4px solid #d4a843;
+            box-shadow: 
+                0 12px 35px rgba(0,0,0,0.5),
+                0 0 0 3px rgba(240,210,150,0.5),
+                0 0 30px rgba(200,150,60,0.3);
+            aspect-ratio: 1 / 1;
+            background: #3d1a4a;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .carousel-container:hover {
+            box-shadow: 
+                0 16px 40px rgba(0,0,0,0.6),
+                0 0 0 4px rgba(240,210,150,0.7),
+                0 0 40px rgba(220,170,70,0.5);
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #d4a843;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #4a2050, #5c2d6e);
+            text-align: center;
+            padding: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .carousel-placeholder span {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---- Carousel Arrows ---- */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(60,25,50,0.75);
+            color: #f0d878;
+            border: 2px solid #d4a843;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            backdrop-filter: blur(4px);
+            line-height: 1;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(80,35,60,0.9);
+            border-color: #f0d878;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(240,200,100,0.5);
+        }
+
+        .carousel-arrow-left {
+            left: 10px;
+        }
+
+        .carousel-arrow-right {
+            right: 10px;
+        }
+
+        /* ---- Carousel Dots ---- */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0.8rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(200,160,100,0.4);
+            border: 1px solid #d4a843;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #f0d878;
+            box-shadow: 0 0 10px rgba(240,200,100,0.7);
+            transform: scale(1.3);
+            border-color: #f0d878;
+        }
+
+        /* ---- Video Section ---- */
+        .video-section {
+            margin: 1.2rem 0;
+        }
+
+        .video-label {
+            color: #c9952e;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            font-family: 'Georgia', serif;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 1.8rem;
+            overflow: hidden;
+            border: 3px solid #d4a843;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 20px rgba(200,150,60,0.25);
+            background: #2a1028;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ---- Message Box ---- */
+        .message-box {
+            background: rgba(60,30,50,0.6);
+            border-radius: 2rem;
+            padding: 1.3rem 1.2rem;
+            margin: 1.2rem 0 1.4rem;
+            color: #f8eaf4;
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.7;
+            border: 1px solid rgba(212,168,67,0.5);
+            font-family: 'Georgia', serif;
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 1px 8px rgba(240,216,180,0.1);
+        }
+
+        /* ---- Royal Emoji Row ---- */
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .emoji-item {
+            font-size: 2.2rem;
+            animation: regalPop 2.8s infinite ease-in-out;
+            cursor: pointer;
+            transition: transform 0.2s;
+            filter: drop-shadow(0 4px 8px rgba(200,160,60,0.5));
+        }
+        .emoji-item:nth-child(2) { animation-delay: 0.35s; }
+        .emoji-item:nth-child(3) { animation-delay: 0.7s; }
+        .emoji-item:nth-child(4) { animation-delay: 1.05s; }
+        .emoji-item:nth-child(5) { animation-delay: 1.4s; }
+
+        @keyframes regalPop {
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            40% { transform: translateY(-9px) scale(1.2) rotate(2deg); }
+        }
+
+        /* ---- Royal Decree Button ---- */
+        .btn-surprise {
+            background: linear-gradient(135deg, #5c2d6e, #3d1a4a);
+            border: 2px solid #d4a843;
+            color: #faf0d7;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.85rem 2.5rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(180,130,50,0.4);
+            margin-top: 0.2rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .btn-surprise:hover {
+            background: linear-gradient(135deg, #6d3880, #4d2258);
+            box-shadow: 0 14px 30px rgba(200,150,60,0.6);
+            transform: translateY(-2px);
+            border-color: #f0d878;
+        }
+
+        .btn-surprise:active {
+            transform: scale(0.94);
+        }
+
+        .hidden-message {
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            color: #faf0d7;
+            background: rgba(80,35,65,0.7);
+            padding: 0.65rem 1.4rem;
+            border-radius: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+            transform: translateY(10px);
+            border: 1px dashed #d4a843;
+            font-family: 'Georgia', serif;
+        }
+
+        .hidden-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 2.8rem;
+            }
+            .carousel-container {
+                max-width: 230px;
+            }
+            .crown-icon {
+                font-size: 3rem;
+            }
+            .carousel-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✨ Golden Sparkles ✨ -->
+    <div class="sparkles-container" id="sparklesContainer"></div>
+
+    <!-- 🌸 Lily Petals Drifting 🌸 -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- 👑 Royal Birthday Card 👑 -->
+    <main class="card">
+        <div class="crown-icon" onclick="burstCelebration()" title="Click for royal celebration!">👑</div>
+        <div class="title-royal">✦ Royal Birthday Decree ✦</div>
+        <h1>Happy Birthday!</h1>
+        <div class="name-highlight">🌸 Friend 🌸</div>
+
+        <!-- 📸 IMAGE CAROUSEL - Replace URLs below 📸 -->
+        <div class="carousel-section">
+            <p class="carousel-label">⚜️ Royal Gallery ⚜️</p>
+            <div style="position: relative; display: inline-block; max-width: 300px; width: 90%;">
+                <div class="carousel-container" id="carouselContainer">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Slides are generated by JavaScript below -->
+                    </div>
+                </div>
+                <!-- Arrows -->
+                <button class="carousel-arrow carousel-arrow-left" id="prevBtn" aria-label="Previous">❮</button>
+                <button class="carousel-arrow carousel-arrow-right" id="nextBtn" aria-label="Next">❯</button>
+            </div>
+            <!-- Dots -->
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <!-- 🎬 VIDEO SECTION - Replace with your YouTube video ID 🎬 -->
+        <div class="video-section">
+            <p class="video-label">🎵 A Royal Symphony For You 🎵</p>
+            <div class="video-wrapper">
+                <!-- 
+                ========================================
+                REPLACE YOUTUBE_VIDEO_ID with actual ID
+                Example: youtube.com/watch?v=dQw4w9WgXcQ
+                The ID is: dQw4w9WgXcQ
+                ========================================
+                -->
+                <iframe id="birthdayVideo"
+                        src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?autoplay=0&rel=0"
+                        title="Royal birthday video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- 💬 Royal Proclamation 💬 -->
+        <div class="message-box">
+            👑 By royal decree, on this most auspicious day,<br>
+            let it be known that <strong>you</strong> are treasured,<br>
+            honored, and deeply beloved.<br>
+            🌸 <em>May your reign of joy be eternal.</em> 🌸
+        </div>
+
+        <!-- 🏰 Royal Court Emojis 🏰 -->
+        <div class="emoji-row">
+            <span class="emoji-item" onclick="burstCelebration()">🏰</span>
+            <span class="emoji-item" onclick="burstCelebration()">💎</span>
+            <span class="emoji-item" onclick="burstCelebration()">🌸</span>
+            <span class="emoji-item" onclick="burstCelebration()">⚜️</span>
+            <span class="emoji-item" onclick="burstCelebration()">🕊️</span>
+        </div>
+
+        <!-- 📜 Royal Decree Button 📜 -->
+        <button class="btn-surprise" id="surpriseBtn">📜 Read the Royal Decree 📜</button>
+        <div class="hidden-message" id="hiddenMessage"></div>
+    </main>
+
+    <script>
+        // ============================================
+        // 👑🌸 ROYAL LILY GARDEN MAGIC 🌸👑
+        // ============================================
+
+        // ---- 🌟 IMAGE CAROUSEL CONFIGURATION 🌟 ----
+        // Replace these URLs with your own images!
+        // Add or remove URLs — the carousel adapts automatically.
+        const carouselImages = [
+            "YOUR_IMAGE_URL_1_HERE",  // ← Replace with your first image URL
+            "YOUR_IMAGE_URL_2_HERE",  // ← Replace with your second image URL
+            "YOUR_IMAGE_URL_3_HERE",  // ← Replace with your third image URL
+            // Add more URLs below — just copy the line and change the URL!
+            // "YOUR_IMAGE_URL_4_HERE",
+            // "YOUR_IMAGE_URL_5_HERE",
+        ];
+
+        // Filter out any empty or placeholder entries
+        const validImages = carouselImages.filter(url => 
+            url && !url.includes('YOUR_IMAGE_URL') && url.trim() !== ''
+        );
+
+        const carouselTrack = document.getElementById('carouselTrack');
+        const carouselDots = document.getElementById('carouselDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        let totalSlides = 0;
+        let autoPlayInterval;
+
+        function buildCarousel() {
+            carouselTrack.innerHTML = '';
+            carouselDots.innerHTML = '';
+
+            // If no valid images, show a placeholder slide
+            const imagesToShow = validImages.length > 0 ? validImages : [null];
+            totalSlides = imagesToShow.length;
+
+            imagesToShow.forEach((url, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+
+                if (url) {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = `Royal memory ${index + 1}`;
+                    img.onerror = function() {
+                        // If image fails, show placeholder for that slide
+                        slide.innerHTML = `
+                            <div class="carousel-placeholder">
+                                <span>👑</span>
+                                <p>Image ${index + 1}<br><small>not available</small></p>
+                            </div>`;
+                    };
+                    slide.appendChild(img);
+                } else {
+                    // Placeholder slide
+                    slide.innerHTML = `
+                        <div class="carousel-placeholder">
+                            <span>👑</span>
+                            <p>Royal portrait<br><small>Add image URLs in code</small></p>
+                        </div>`;
+                }
+
+                carouselTrack.appendChild(slide);
+
+                // Create dot
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                carouselDots.appendChild(dot);
+            });
+
+            currentSlide = 0;
+            updateCarouselPosition();
+            startAutoPlay();
+        }
+
+        function updateCarouselPosition() {
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = carouselDots.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarouselPosition();
+            resetAutoPlay();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            if (totalSlides > 1) {
+                autoPlayInterval = setInterval(nextSlide, 3500);
+            }
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+        }
+
+        function resetAutoPlay() {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+
+        // Button listeners
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevSlide();
+            burstCelebration(); // mini celebration on slide change!
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextSlide();
+            burstCelebration();
+        });
+
+        // Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const carouselContainer = document.getElementById('carouselContainer');
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Click on carousel image for celebration
+        carouselContainer.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+                burstCelebration();
+            }
+        });
+
+        // Initialize carousel
+        buildCarousel();
+
+        // ---- Show placeholder if image fails to load (legacy) ----
+        function showPhotoPlaceholder() {
+            // Kept for compatibility, but carousel handles this now
+        }
+
+        // ---- Create Golden Sparkles ----
+        const sparklesContainer = document.getElementById('sparklesContainer');
+        const sparkleSymbols = ['✦', '✧', '⋆', '⭑', '✶', '·', '⚝', '⁕'];
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+            sparkle.style.left = Math.random() * 96 + '%';
+            sparkle.style.top = -(Math.random() * 5) + 'vh';
+            sparkle.style.fontSize = (Math.random() * 14 + 8) + 'px';
+            sparkle.style.color = Math.random() > 0.5 ? '#f0d878' : '#d4a843';
+            sparkle.style.setProperty('--float-duration', (Math.random() * 5 + 6) + 's');
+            sparkle.style.setProperty('--float-delay', (Math.random() * 3) + 's');
+            sparkle.style.setProperty('--drift-1', (Math.random() * 30 - 15) + 'px');
+            sparkle.style.setProperty('--drift-2', (Math.random() * 50 - 25) + 'px');
+            sparkle.style.setProperty('--drift-3', (Math.random() * 40 - 20) + 'px');
+            sparkle.style.setProperty('--drift-4', (Math.random() * 35 - 17) + 'px');
+            sparklesContainer.appendChild(sparkle);
+
+            const duration = parseFloat(sparkle.style.getPropertyValue('--float-duration')) * 1000;
+            const delay = parseFloat(sparkle.style.getPropertyValue('--float-delay')) * 1000;
+            setTimeout(() => {
+                if (sparkle.parentNode) sparkle.remove();
+            }, duration + delay + 500);
+        }
+
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createSparkle, i * 70);
+        }
+        setInterval(() => {
+            if (sparklesContainer.children.length < 40) createSparkle();
+        }, 500);
+
+        // ---- Create Lily Petals ----
+        const petalsContainer = document.getElementById('petalsContainer');
+        const petalEmojis = ['🌸', '🌷', '💮', '🪷', '🏵️', '🌺', '✿', '❀'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+            petal.style.left = Math.random() * 94 + '%';
+            petal.style.top = -(Math.random() * 6) + 'vh';
+            petal.style.fontSize = (Math.random() * 16 + 12) + 'px';
+            petal.style.setProperty('--fall-duration', (Math.random() * 7 + 8) + 's');
+            petal.style.setProperty('--fall-delay', (Math.random() * 4) + 's');
+            petal.style.setProperty('--sway-1', (Math.random() * 45 - 22) + 'px');
+            petal.style.setProperty('--sway-2', (Math.random() * 55 - 27) + 'px');
+            petal.style.setProperty('--sway-3', (Math.random() * 50 - 25) + 'px');
+            petalsContainer.appendChild(petal);
+
+            const duration = parseFloat(petal.style.getPropertyValue('--fall-duration')) * 1000;
+            const delay = parseFloat(petal.style.getPropertyValue('--fall-delay')) * 1000;
+            setTimeout(() => {
+                if (petal.parentNode) petal.remove();
+            }, duration + delay + 600);
+        }
+
+        for (let i = 0; i < 18; i++) {
+            setTimeout(createPetal, i * 110);
+        }
+        setInterval(() => {
+            if (petalsContainer.children.length < 30) createPetal();
+        }, 800);
+
+        // ---- Combined Burst ----
+        function burstCelebration() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(createSparkle, i * 25);
+                setTimeout(createPetal, i * 30);
+            }
+        }
+
+        // ---- Royal Decree Messages ----
+        const royalMessages = [
+            "👑 By royal decree: You shall be celebrated today and always! 🏰",
+            "💎 A jewel of the realm — that's you, Your Highness! ✨",
+            "🌸 The kingdom rejoices on this, your most special day! 🎂",
+            "⚜️ Nobility of heart, royalty of spirit — you embody both. 💖",
+            "🏰 May your castle be filled with laughter and love! 🕊️",
+            "📜 Henceforth, this day shall be known as [Name]'s Day! 👑",
+            "💎 More precious than any crown jewel: your beautiful soul. 🌟",
+            "🌸 The royal gardens bloom brighter in your honor! 🌷",
+            "⚜️ Kneel before no one — you are the monarch of joy! 🎉",
+            "🕊️ Peace, prosperity, and endless cake to you, dear ruler! 🍰"
+        ];
+
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const hiddenMessage = document.getElementById('hiddenMessage');
+
+        surpriseBtn.addEventListener('click', () => {
+            let msg = royalMessages[Math.floor(Math.random() * royalMessages.length)];
+            if (hiddenMessage.textContent === msg && royalMessages.length > 1) {
+                const others = royalMessages.filter(m => m !== msg);
+                msg = others[Math.floor(Math.random() * others.length)];
+            }
+            hiddenMessage.textContent = msg;
+            hiddenMessage.classList.add('visible');
+            burstCelebration();
+
+            surpriseBtn.style.transform = 'scale(0.92)';
+            setTimeout(() => {
+                surpriseBtn.style.transform = '';
+            }, 150);
+        });
+
+        // ---- Click crown ----
+        const crownIcon = document.querySelector('.crown-icon');
+        if (crownIcon) {
+            crownIcon.addEventListener('click', () => {
+                burstCelebration();
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(createSparkle, i * 20);
+                    setTimeout(createPetal, i * 25);
+                }
+                crownIcon.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    crownIcon.style.transform = '';
+                }, 300);
+            });
+        }
+
+        console.log('👑🌸 Royal Lily carousel site ready! Replace image URLs & YouTube ID. 🌸👑');
+        console.log('📸 Carousel images:', validImages.length > 0 ? validImages : 'No custom images yet — add URLs to carouselImages array');
+        console.log('🎬 Video: Check iframe src in HTML');
+        console.log('🔄 Carousel: ' + totalSlides + ' slide(s), auto-advances every 3.5s');
+    </script>
+</body>
+</html>
